@@ -2,11 +2,10 @@ package com.rituraj.candidateOnboardingSystem.controller.test;
 
 import com.rituraj.candidateOnboardingSystem.dto.BankDetailsInsertDTO;
 import com.rituraj.candidateOnboardingSystem.model.BankDetails;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.service.test.BankDetailsTestService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

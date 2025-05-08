@@ -3,9 +3,10 @@ package com.rituraj.candidateOnboardingSystem.service;
 import com.rituraj.candidateOnboardingSystem.dto.JobInsertionDTO;
 import com.rituraj.candidateOnboardingSystem.dto.JobStatusUpdateDTO;
 import com.rituraj.candidateOnboardingSystem.enums.ApiStatus;
+import com.rituraj.candidateOnboardingSystem.exception.EntityNotFoundException;
 import com.rituraj.candidateOnboardingSystem.mapper.JobMapper;
 import com.rituraj.candidateOnboardingSystem.model.Job;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.model.TechStack;
 import com.rituraj.candidateOnboardingSystem.repo.JobRepo;
 import jakarta.validation.Valid;
@@ -33,7 +34,7 @@ public class JobService {
         List<Job> jobList = jobRepo.findAll();
 
         if(jobList.isEmpty()){
-            // THROW EXC
+            throw new EntityNotFoundException("No job record found!");
         }
 
         Response<List<Job>> response = Response.<List<Job>>builder()
@@ -49,7 +50,7 @@ public class JobService {
         List<Job> jobList = jobRepo.findByActiveStatus(activeStatus);
 
         if(jobList.isEmpty()){
-            // THR EXC
+            throw new EntityNotFoundException("No job record found!");
         }
 
         Response<List<Job>> response = Response.<List<Job>>builder()
@@ -84,7 +85,7 @@ public class JobService {
     public ResponseEntity<Response<String>> updateJobDetails(JobStatusUpdateDTO jobStatusUpdateDTO) {
         Optional<Job> optionalJob = jobRepo.findById(jobStatusUpdateDTO.getId());
         if(optionalJob.isEmpty()){
-            // THROW EXC
+            throw new EntityNotFoundException("Job not found with provided id!");
         }
 
         Job job = optionalJob.get();

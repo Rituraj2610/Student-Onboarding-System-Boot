@@ -3,15 +3,12 @@ package com.rituraj.candidateOnboardingSystem.controller.test;
 import com.rituraj.candidateOnboardingSystem.dto.CandidateInsertDTO;
 import com.rituraj.candidateOnboardingSystem.dto.CandidateJobDTO;
 import com.rituraj.candidateOnboardingSystem.dto.CandidateStatusDTO;
-import com.rituraj.candidateOnboardingSystem.dto.CandidateUpdateDTO;
 import com.rituraj.candidateOnboardingSystem.model.Candidate;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.model.Status;
 import com.rituraj.candidateOnboardingSystem.service.test.CandidateTestService;
 import jakarta.validation.Valid;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,22 +1,22 @@
 package com.rituraj.candidateOnboardingSystem.service.test;
 
-import com.rituraj.candidateOnboardingSystem.dto.AddressAddDTO;
 import com.rituraj.candidateOnboardingSystem.dto.EducationDetailsInsertDTO;
 import com.rituraj.candidateOnboardingSystem.enums.ApiStatus;
+import com.rituraj.candidateOnboardingSystem.exception.EntityNotFoundException;
 import com.rituraj.candidateOnboardingSystem.mapper.EducationDetailsMapper;
-import com.rituraj.candidateOnboardingSystem.model.Address;
 import com.rituraj.candidateOnboardingSystem.model.Candidate;
 import com.rituraj.candidateOnboardingSystem.model.EducationDetails;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.repo.EducationDetailsRepo;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class EducationDetailsTestService {
     private EducationDetailsRepo educationDetailsRepo;
     private CandidateTestService candidateTestService;
@@ -31,7 +31,7 @@ public class EducationDetailsTestService {
     public ResponseEntity<Response<EducationDetails>> getEducationDetailsByCandidateId(Long id) {
         Optional<EducationDetails> optionalEducationDetails = educationDetailsRepo.findByCandidateId(id);
         if(optionalEducationDetails.isEmpty()){
-            // THROW EXC
+            throw new EntityNotFoundException("Education Details not found with provided id!");
         }
 
         Response<EducationDetails> response = Response.<EducationDetails>builder()

@@ -1,21 +1,22 @@
 package com.rituraj.candidateOnboardingSystem.service.test;
 
-import com.rituraj.candidateOnboardingSystem.dto.AddressAddDTO;
 import com.rituraj.candidateOnboardingSystem.dto.DocumentInsertDTO;
 import com.rituraj.candidateOnboardingSystem.enums.ApiStatus;
+import com.rituraj.candidateOnboardingSystem.exception.EntityNotFoundException;
 import com.rituraj.candidateOnboardingSystem.mapper.DocumentMapper;
-import com.rituraj.candidateOnboardingSystem.model.Address;
 import com.rituraj.candidateOnboardingSystem.model.Candidate;
 import com.rituraj.candidateOnboardingSystem.model.Document;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.repo.DocumentRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class DocumentTestService {
     private DocumentRepo documentRepo;
     private CandidateTestService candidateTestService;
@@ -30,7 +31,7 @@ public class DocumentTestService {
     public ResponseEntity<Response<Document>> getDocumentByCandidateId(Long id) {
         Optional<Document> optionalDocument = documentRepo.findByCandidateId(id);
         if(optionalDocument.isEmpty()){
-            // THROW EXC
+            throw new EntityNotFoundException("Document not found with provided id!");
         }
 
         Response<Document> response = Response.<Document>builder()

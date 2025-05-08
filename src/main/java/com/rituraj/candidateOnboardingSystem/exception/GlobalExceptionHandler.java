@@ -36,4 +36,13 @@ public class GlobalExceptionHandler {
                 .build();
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = {CandidateApplicationRejectedException.class})
+    public ResponseEntity<ErrorResponse> handleCandidateApplicationRejectedException(CandidateApplicationRejectedException e){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(ApiStatus.CONFLICT)
+                .message(e.getMessage())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
 }

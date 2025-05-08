@@ -2,11 +2,10 @@ package com.rituraj.candidateOnboardingSystem.controller.test;
 
 import com.rituraj.candidateOnboardingSystem.dto.DocumentInsertDTO;
 import com.rituraj.candidateOnboardingSystem.model.Document;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.service.test.DocumentTestService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

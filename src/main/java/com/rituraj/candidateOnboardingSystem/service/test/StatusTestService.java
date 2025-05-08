@@ -3,9 +3,10 @@ package com.rituraj.candidateOnboardingSystem.service.test;
 import com.rituraj.candidateOnboardingSystem.dto.CandidateStatusDTO;
 import com.rituraj.candidateOnboardingSystem.enums.ApiStatus;
 import com.rituraj.candidateOnboardingSystem.enums.JobStatus;
+import com.rituraj.candidateOnboardingSystem.exception.EntityNotFoundException;
 import com.rituraj.candidateOnboardingSystem.model.Candidate;
 import com.rituraj.candidateOnboardingSystem.model.Job;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.model.Status;
 import com.rituraj.candidateOnboardingSystem.repo.StatusRepo;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class StatusTestService {
     public ResponseEntity<Response<Status>> getCandidateStatusById(CandidateStatusDTO candidateStatusDTO) {
         Optional<Status> optionalStatus = statusRepo.findByIdAndCandidateId(candidateStatusDTO.getStatusId(), candidateStatusDTO.getCandidateId());
         if(optionalStatus.isEmpty()){
-            // THROW EXCEPTION
+            throw new EntityNotFoundException("Status not found with provided id!");
         }
         Response<Status> response = Response.<Status>builder()
                 .status(ApiStatus.FOUND)
@@ -47,7 +48,7 @@ public class StatusTestService {
         Status s = statusRepo.save(status);
         Optional<Status> optionalStatus = statusRepo.findById(s.getId());
         if(optionalStatus.isEmpty()){
-            // THROW EXCEPTION
+            throw new EntityNotFoundException("Status not found with provided id!");
         }
 
         Response<String> response = Response.<String>builder()

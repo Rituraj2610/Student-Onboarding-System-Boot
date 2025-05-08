@@ -1,12 +1,11 @@
 package com.rituraj.candidateOnboardingSystem.controller;
 
 import com.rituraj.candidateOnboardingSystem.dto.CandidateStatusUpdateDTO;
-import com.rituraj.candidateOnboardingSystem.model.Response;
+import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.model.Status;
 import com.rituraj.candidateOnboardingSystem.service.StatusService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

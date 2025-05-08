@@ -1,19 +1,16 @@
 package com.rituraj.candidateOnboardingSystem.service.test;
 
-import com.rituraj.candidateOnboardingSystem.dto.CandidateInsertDTO;
-import com.rituraj.candidateOnboardingSystem.dto.CandidateJobDTO;
-import com.rituraj.candidateOnboardingSystem.dto.CandidateStatusDTO;
-import com.rituraj.candidateOnboardingSystem.dto.CandidateUpdateDTO;
+import com.rituraj.candidateOnboardingSystem.dto.*;
 import com.rituraj.candidateOnboardingSystem.enums.ApiStatus;
+import com.rituraj.candidateOnboardingSystem.exception.CandidateApplicationRejectedException;
+import com.rituraj.candidateOnboardingSystem.exception.DuplicateEntityException;
+import com.rituraj.candidateOnboardingSystem.exception.EntityNotFoundException;
 import com.rituraj.candidateOnboardingSystem.mapper.CandidateMapper;
 import com.rituraj.candidateOnboardingSystem.model.*;
 import com.rituraj.candidateOnboardingSystem.repo.CandidateRepo;
 import com.rituraj.candidateOnboardingSystem.service.TechStackService;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
-import org.hibernate.Hibernate;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +40,7 @@ public class CandidateTestService {
     public ResponseEntity<Response<List<Candidate>>> getAllCandidates() {
         List<Candidate> candidateList = candidateRepo.findAll();
         if(candidateList.isEmpty()){
-            // THROW EXCEPTION
+            throw new EntityNotFoundException("No candidate found in records!");
         }
 
         Response<List<Candidate>> response = Response.<List<Candidate>>builder()
@@ -58,7 +55,7 @@ public class CandidateTestService {
     public ResponseEntity<Response<Candidate>> getCandidateById(Long id) {
         Optional<Candidate> optionalCandidate = candidateRepo.findById(id);
         if(optionalCandidate.isEmpty()){
-            //THROW EXCEPTION
+            throw new EntityNotFoundException("Candidate not found with provided id!");
         }
 
         Response<Candidate> response = Response.<Candidate>builder()
@@ -72,7 +69,7 @@ public class CandidateTestService {
     public Candidate getCandidateById2(Long id) {
         Optional<Candidate> optionalCandidate = candidateRepo.findById(id);
         if(optionalCandidate.isEmpty()){
-            //THROW EXCEPTION
+            throw new EntityNotFoundException("Candidate not found with provided id!");
         }
         return optionalCandidate.get();
     }
@@ -85,11 +82,12 @@ public class CandidateTestService {
 
         Optional<Candidate> optionalCandidate = candidateRepo.findByEmail(candidateInsertDTO.getEmail());
         if(optionalCandidate.isPresent()){
-            //THROW EXCEPTION
+            throw new DuplicateEntityException("Duplicate candidate not allowed!");
         }
 
         Candidate candidate = candidateMapper.toEntity(candidateInsertDTO);
 
+        // WE WANTED TO MAP THE TECH NAMES IN DTO WITH TECH STACK OBJECT AND ADD THEM IN THE LIST
         List<TechStack> techStacks = candidateInsertDTO.getTechNames().stream()
                 .map(techName -> techStackService.getTechStackByName(techName))
                 .collect(Collectors.toList());
@@ -113,7 +111,7 @@ public class CandidateTestService {
     public ResponseEntity<Response<String>> applyCandidateToJob(CandidateJobDTO candidateJobDTO) {
         Optional<Candidate> optionalCandidate = candidateRepo.findById(candidateJobDTO.getCandidateId());
         if(optionalCandidate.isEmpty()){
-            // THROW EXCEPTION
+            throw new EntityNotFoundException("Candidate not found with provided id!");
         }
         Candidate candidate = optionalCandidate.get();
         Job job = jobTestService.getJobById(candidateJobDTO.getJobId());
@@ -122,11 +120,10 @@ public class CandidateTestService {
         List<TechStack> jobTechStackList = job.getTechStackList();
 
         if(!canApply(candidateTechStackList, jobTechStackList)){
-//            throw new RuntimeException("ff");
+            throw new CandidateApplicationRejectedException("Candidate doesn't fulfill the Job criteria!");
         }
 
         return statusTestService.applyCandidateToJob(candidate, job);
-
     }
 
     private boolean canApply(List<TechStack> l1, List<TechStack> l2){
@@ -146,7 +143,7 @@ public class CandidateTestService {
         Optional<Candidate> optionalCandidate = candidateRepo.findById(id);
 
         if(optionalCandidate.isEmpty()){
-            // THROW EXC
+            throw new EntityNotFoundException("Candidate not found with provided id!");
         }
 
         candidateRepo.deleteById(id);
