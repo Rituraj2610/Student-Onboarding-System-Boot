@@ -14,3 +14,5 @@ spring:
     console:
       enabled: true
       path: /h2
+  aop:
+    auto: true
