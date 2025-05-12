@@ -8,6 +8,7 @@ import com.rituraj.candidateOnboardingSystem.mapper.JobMapper;
 import com.rituraj.candidateOnboardingSystem.model.Job;
 import com.rituraj.candidateOnboardingSystem.dto.Response;
 import com.rituraj.candidateOnboardingSystem.model.TechStack;
+import com.rituraj.candidateOnboardingSystem.rabbitmq.JobProducer;
 import com.rituraj.candidateOnboardingSystem.repo.JobRepo;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,13 @@ public class JobService {
     private JobRepo jobRepo;
     private JobMapper jobMapper;
     private TechStackService techStackService;
+    private JobProducer jobProducer;
 
-    public JobService(JobRepo jobRepo, JobMapper jobMapper, TechStackService techStackService) {
+    public JobService(JobRepo jobRepo, JobMapper jobMapper, TechStackService techStackService, JobProducer jobProducer) {
         this.jobRepo = jobRepo;
         this.jobMapper = jobMapper;
         this.techStackService = techStackService;
+        this.jobProducer = jobProducer;
     }
 
     public ResponseEntity<Response<List<Job>>> getAllJobs() {
@@ -72,6 +75,8 @@ public class JobService {
         job.setTechStackList(techStacks);
 
         Job j = jobRepo.save(job);
+
+        jobProducer.sendJob(job);
 
         Response<String> response = Response.<String>builder()
                 .status(ApiStatus.CREATED)

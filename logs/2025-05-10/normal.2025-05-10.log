@@ -1,0 +1,8 @@
+2025-05-10 15:53:33.481 [http-nio-8080-exec-1] INFO  NormalLogger - Entering method: StatusController.StatusController.getStatusByCandidateId(..)
+2025-05-10 15:53:33.482 [http-nio-8080-exec-1] INFO  NormalLogger - Entering method: StatusService.StatusService.getStatusByCandidateId(..)
+2025-05-10 15:53:36.067 [http-nio-8080-exec-3] INFO  NormalLogger - Entering method: TechStackController.TechStackController.addTechStack(..)
+2025-05-10 15:53:36.068 [http-nio-8080-exec-3] INFO  NormalLogger - Entering method: TechStackService.TechStackService.addTechStack(..)
+2025-05-10 15:53:36.306 [http-nio-8080-exec-3] INFO  NormalLogger - Exiting method: TechStackService.TechStackService.addTechStack(..), Execution time: 237ms
+2025-05-10 15:53:36.311 [http-nio-8080-exec-3] INFO  NormalLogger - Exiting method: TechStackController.TechStackController.addTechStack(..), Execution time: 243ms
+2025-05-10 15:53:38.245 [http-nio-8080-exec-5] INFO  NormalLogger - Entering method: TechStackService.TechStackService.getTechStackByName(..)
+2025-05-10 15:53:38.260 [http-nio-8080-exec-5] INFO  NormalLogger - Exiting method: TechStackService.TechStackService.getTechStackByName(..), Execution time: 14ms

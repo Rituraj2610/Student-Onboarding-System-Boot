@@ -18,7 +18,7 @@ import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "tech_stack")
+//@Table(name = "tech_stack")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -1,0 +1,2 @@
+2025-05-10 15:53:33.587 [http-nio-8080-exec-1] ERROR ExceptionLogger - Exception in method: StatusService.getStatusByCandidateId(..), Message: Status not found with provided id!
+2025-05-10 15:53:33.599 [http-nio-8080-exec-1] ERROR ExceptionLogger - Exception in method: StatusController.getStatusByCandidateId(..), Message: Status not found with provided id!
