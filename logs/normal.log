@@ -82,3 +82,15 @@
 2025-05-13 00:49:00.263 [http-nio-8080-exec-4] INFO  NormalLogger - Exiting method: TechStackService.TechStackService.getTechStackByName(..), Execution time: 8ms
 2025-05-13 00:49:00.487 [http-nio-8080-exec-4] INFO  NormalLogger - Exiting method: JobService.JobService.addJob(..), Execution time: 237ms
 2025-05-13 00:49:00.488 [http-nio-8080-exec-4] INFO  NormalLogger - Exiting method: JobController.JobController.addJob(..), Execution time: 240ms
+2025-05-13 14:04:48.611 [http-nio-8080-exec-4] INFO  NormalLogger - Entering method: TechStackController.TechStackController.addTechStack(..)
+2025-05-13 14:04:48.614 [http-nio-8080-exec-4] INFO  NormalLogger - Entering method: TechStackService.TechStackService.addTechStack(..)
+2025-05-13 14:04:49.109 [http-nio-8080-exec-4] INFO  NormalLogger - Exiting method: TechStackService.TechStackService.addTechStack(..), Execution time: 494ms
+2025-05-13 14:04:49.115 [http-nio-8080-exec-4] INFO  NormalLogger - Exiting method: TechStackController.TechStackController.addTechStack(..), Execution time: 501ms
+2025-05-13 14:04:56.433 [http-nio-8080-exec-2] INFO  NormalLogger - Entering method: TechStackService.TechStackService.getTechStackByName(..)
+2025-05-13 14:04:56.457 [http-nio-8080-exec-2] INFO  NormalLogger - Exiting method: TechStackService.TechStackService.getTechStackByName(..), Execution time: 24ms
+2025-05-13 14:05:00.630 [http-nio-8080-exec-3] INFO  NormalLogger - Entering method: JobController.JobController.addJob(..)
+2025-05-13 14:05:00.633 [http-nio-8080-exec-3] INFO  NormalLogger - Entering method: JobService.JobService.addJob(..)
+2025-05-13 14:05:00.637 [http-nio-8080-exec-3] INFO  NormalLogger - Entering method: TechStackService.TechStackService.getTechStackByName(..)
+2025-05-13 14:05:00.646 [http-nio-8080-exec-3] INFO  NormalLogger - Exiting method: TechStackService.TechStackService.getTechStackByName(..), Execution time: 8ms
+2025-05-13 14:05:00.841 [http-nio-8080-exec-3] INFO  NormalLogger - Exiting method: JobService.JobService.addJob(..), Execution time: 206ms
+2025-05-13 14:05:00.842 [http-nio-8080-exec-3] INFO  NormalLogger - Exiting method: JobController.JobController.addJob(..), Execution time: 209ms

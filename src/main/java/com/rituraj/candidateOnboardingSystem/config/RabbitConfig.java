@@ -1,5 +1,6 @@
 package com.rituraj.candidateOnboardingSystem.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -18,8 +19,9 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
+    public Jackson2JsonMessageConverter jackson2JsonMessageConverter(ObjectMapper objectMapper) {
+        Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter(objectMapper);
+        return converter;
     }
 
     @Bean
@@ -34,12 +36,9 @@ public class RabbitConfig {
     public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
             ConnectionFactory connectionFactory,
             Jackson2JsonMessageConverter messageConverter) {
-
         SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
         factory.setMessageConverter(messageConverter);
         return factory;
     }
-
 }
-
