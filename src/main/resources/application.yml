@@ -36,6 +36,9 @@ spring:
           starttls:
             enable: true
 
+  jwt:
+    secret: 85fd6b526abc8383c28dc376f206fe7b8c2bf0a69689a052c76e439d849461c5e4f6839682b613ace22a9b40d8f4b322d5f2eb03a4fd5ed58ef1505126a161d6
+    expiration: 86400000
 #
 #    datasource:
 #      url: jdbc:h2:mem:testdb
